@@ -32,6 +32,43 @@ extern int init_mqtt();
 extern void publish_message(const char *payload);
 ```
 
+## Implementing Daemon
+Change startup file
+```
+sudo nano /etc/systemd/system/displayopgave.service
+```
+file should look like this
+```
+[Unit]
+Description=My led display
+After=network.target
+
+[Service]
+ExecStart=/home/debian/bin/filename
+Type=simple
+Restart=always
+
+
+[Install]
+WantedBy=default.target
+```
+Reload the systemd manager configuration
+```
+sudo systemctl daemon-reload
+```
+Enable service
+```
+sudo systemctl enable myprogram.service
+```
+Start service
+```
+sudo systemctl start myprogram.service
+```
+Check status
+```
+systemctl status myprogram.service
+```
+
 ## Display.c
 
 ### Updating time intervals
